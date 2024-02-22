@@ -1,0 +1,257 @@
+
+{
+    "products": [
+      {
+        "id": "0001",
+        "name": "Laptop",
+        "price": 325,
+        "stock": 20,
+        "image": [
+          "../src/assets/img/laptop1.webp",
+          "../src/assets/img/laptop2.webp",
+          "../src/assets/img/laptop3.webp"
+        ],
+        "description": "This is good Laptop for basic use. It's a great product for your needs.",
+        "category": "Electronics",
+        "brand": "useful",
+        "rating": 4.5,
+        "reviews": [
+          {
+            "id": 1,
+            "userId": 1,
+            "rating": 5,
+            "comment": "Great product! I love it.",
+            "date": "2023-08-01"
+          },
+          {
+            "id": 2,
+            "userId": 2,
+            "rating": 4,
+            "comment": "Good product. Recommended.",
+            "date": "2023-08-02"
+          }
+        ],
+        "filters": [
+          "topsales",
+          "ait premium"
+        ]
+      },
+      {
+        "id": "0002",
+        "name": "Ukelele",
+        "price": 40,
+        "stock": 10,
+        "image": [
+          "../src/assets/img/ukelele1.webp",
+          "../src/assets/img/ukelele2.webp",
+          "../src/assets/img/ukelele3.webp"
+        ],
+        "description": "High-quality Ukelele",
+        "category": "Music",
+        "brand": "Brand_ABC",
+        "rating": 4.0,
+        "reviews": [
+          {
+            "id": 3,
+            "userId": 1,
+            "rating": 4,
+            "comment": "Nice product. Worth the price.",
+            "date": "2023-08-03"
+          }
+        ],
+        "filters": [
+          "topsales",
+          "discounts"
+        ]
+      },
+      {
+        "id": "0003",
+        "name": "Computer Screen",
+        "price": 80,
+        "stock": 120,
+        "image": [
+          "../src/assets/img/screen1.webp",
+          "../src/assets/img/screen2.webp",
+          "../src/assets/img/screen3.webp"
+        ],
+        "description": "Good size. It's a great product for your needs.",
+        "category": "Electronics",
+        "brand": "useful",
+        "rating": 4.5,
+        "reviews": [
+          {
+            "id": 1,
+            "userId": 1,
+            "rating": 5,
+            "comment": "Great product! I love it.",
+            "date": "2023-08-01"
+          },
+          {
+            "id": 2,
+            "userId": 2,
+            "rating": 4,
+            "comment": "Good product. Recommended.",
+            "date": "2023-08-02"
+          }
+        ],
+        "filters": [
+          "topsales",
+          "ait premium"
+        ]
+      },
+      {
+        "id": "0004",
+        "name": "Microphone",
+        "price": 25,
+        "stock": 15,
+        "image": [
+          "../src/assets/img/mic1.webp",
+          "../src/assets/img/mic2.webp",
+          "../src/assets/img/mic3.webp"
+        ],
+        "description": "High-quality microphone",
+        "category": "Music",
+        "brand": "Brand_ABC",
+        "rating": 4.0,
+        "reviews": [
+          {
+            "id": 3,
+            "userId": 1,
+            "rating": 4,
+            "comment": "Nice product. Worth the price.",
+            "date": "2023-08-03"
+          }
+        ],
+        "filters": [
+          "topsales",
+          "discounts"
+        ]
+      },
+      {
+        "id": "0005",
+        "name": "Earphones",
+        "price": 15,
+        "stock": 5,
+        "image": [
+          "../src/assets/img/earplugs3-1.webp",
+          "../src/assets/img/earplugs3-2.webp",
+          "../src/assets/img/earplugs3-3.webp"
+        ],
+        "description": "Basic and water resistant",
+        "category": "Electronics",
+        "brand": "bleh",
+        "rating": 1.5,
+        "reviews": [
+          {
+            "id": 1,
+            "userId": 1,
+            "rating": 1,
+            "comment": "NO GOOD. DON'T BUY.",
+            "date": "2023-08-01"
+          },
+          {
+            "id": 2,
+            "userId": 2,
+            "rating": 4,
+            "comment": "Good product. Recommended.",
+            "date": "2023-08-02"
+          }
+        ],
+        "filters": [
+          "topsales",
+          "ait premium"
+        ]
+      },
+      {
+        "id": "0006",
+        "name": "Headphone set",
+        "price": 40,
+        "stock": 12,
+        "image": [
+          "../src/assets/img/earplugs2-1.webp",
+          "../src/assets/img/earplugs2-2.webp",
+          "../src/assets/img/earplugs2-2.webp"
+        ],
+        "description": "High-quality headset",
+        "category": "Music",
+        "brand": "Brand_ABC",
+        "rating": 4.0,
+        "reviews": [
+          {
+            "id": 3,
+            "userId": 1,
+            "rating": 4,
+            "comment": "Nice product. Worth the price.",
+            "date": "2023-08-03"
+          }
+        ],
+        "filters": [
+          "topsales",
+          "discounts"
+        ]
+      },
+      {
+        "id": "0007",
+        "name": "Airpods",
+        "price": 45,
+        "stock": 20,
+        "image": [
+          "../src/assets/img/earplugs1-1.webp",
+          "../src/assets/img/earplugs1-2.webp",
+          "../src/assets/img/earplugs1-3.webp"
+        ],
+        "description": "It's a great product for your needs.",
+        "category": "Electronics",
+        "brand": "useful",
+        "rating": 4.5,
+        "reviews": [
+          {
+            "id": 1,
+            "userId": 1,
+            "rating": 5,
+            "comment": "Great,I love it.",
+            "date": "2023-08-01"
+          },
+          {
+            "id": 2,
+            "userId": 2,
+            "rating": 4,
+            "comment": "Good product. Recommended.",
+            "date": "2023-08-02"
+          }
+        ],
+        "filters": [
+          "topsales",
+          "ait premium"
+        ]
+      },
+      {
+        "id": "0008",
+        "name": "Expresso Machine",
+        "price": 45,
+        "stock": 2,
+        "image": [
+          "../src/assets/img/coffee1.webp",
+          "../src/assets/img/coffee2.webp",
+          "../src/assets/img/coffee3.webp"
+        ],
+        "description": "High-quality coffee machine",
+        "category": "Kitchen",
+        "brand": "Cafeine",
+        "rating": 4.0,
+        "reviews": [
+          {
+            "id": 3,
+            "userId": 1,
+            "rating": 4,
+            "comment": "Nice product. Worth the price.",
+            "date": "2023-08-03"
+          }
+        ],
+        "filters": [
+          "topsales",
+          "discounts"
+        ]
+      }
+    ]
+  }
