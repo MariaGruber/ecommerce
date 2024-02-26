@@ -2,7 +2,7 @@
 {
     "products": [
       {
-        "id": "0001",
+        "id": 1,
         "name": "Laptop",
         "price": 325,
         "stock": 20,
@@ -37,7 +37,7 @@
         ]
       },
       {
-        "id": "0002",
+        "id": 2,
         "name": "Ukelele",
         "price": 40,
         "stock": 10,
@@ -65,7 +65,7 @@
         ]
       },
       {
-        "id": "0003",
+        "id": 3,
         "name": "Computer Screen",
         "price": 80,
         "stock": 120,
@@ -100,7 +100,7 @@
         ]
       },
       {
-        "id": "0004",
+        "id": 4,
         "name": "Microphone",
         "price": 25,
         "stock": 15,
@@ -128,7 +128,7 @@
         ]
       },
       {
-        "id": "0005",
+        "id": 5,
         "name": "Earphones",
         "price": 15,
         "stock": 5,
@@ -163,7 +163,7 @@
         ]
       },
       {
-        "id": "0006",
+        "id": 6,
         "name": "Headphone set",
         "price": 40,
         "stock": 12,
@@ -191,7 +191,7 @@
         ]
       },
       {
-        "id": "0007",
+        "id": 7,
         "name": "Airpods",
         "price": 45,
         "stock": 20,
@@ -226,7 +226,7 @@
         ]
       },
       {
-        "id": "0008",
+        "id": 8,
         "name": "Expresso Machine",
         "price": 45,
         "stock": 2,

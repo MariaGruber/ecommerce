@@ -9,15 +9,22 @@ import LogIn from './pages/login';
 import ProductDetail from './pages/productDescription';
 import Wishlist from './pages/wishlist';
 import SignUp from './pages/signUp';
+import PrivateRoute from './privateRoutes/privateRoutes';
 import ErrorPage from './pages/error';
+
 
 // loader products
 import { getProducts } from './services/productsService';
 
 const router = createBrowserRouter([
     {
+        path: '/login',
+        element: <Layout><LogIn /></Layout>,
+        errorElement: <ErrorPage />,
+    },
+    {
         path: '/',
-        element: <Home />,
+        element: <PrivateRoute><Layout><Home /></Layout></PrivateRoute>,
         errorElement: <ErrorPage />,
         loader:  async () => {
             return getProducts();
@@ -34,12 +41,7 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
     },
     {
-        path: '/login',
-        element: <Layout><LogIn /></Layout>,
-        errorElement: <ErrorPage />,
-    },
-    {
-        path: '/productDetail',
+        path: '/productDetail/:id',
         element: <Layout><ProductDetail /></Layout>,
         errorElement: <ErrorPage />,
     },

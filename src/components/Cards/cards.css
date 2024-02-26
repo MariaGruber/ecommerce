@@ -1,0 +1,49 @@
+.card-container {
+    width: 95vw;
+    background-color: grey;
+    border-radius: 0.8rem;
+    height: 12rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 0.5rem;
+    margin-left: 0.7rem;
+}
+
+.card-container img {
+    max-width: 12rem;
+    max-height: 10rem;
+    margin: 0.5rem 2rem;
+}
+
+.card-product-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+}
+
+.card-product-brand {
+    font-size: 1.2rem;
+    color: beige;
+    margin-bottom: 0.4rem;
+}
+
+.card-product-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: orangered;
+    margin-top: 0;
+}
+
+.shopping-cart-icon {
+    height: 30px;
+    width: 30px;
+    padding: 5px;
+    position: relative;
+    top: 70%;
+    right: 2%;
+    border-radius: 50%;
+    background-color:#1B201E;
+    margin-right: 10px;
+}
+

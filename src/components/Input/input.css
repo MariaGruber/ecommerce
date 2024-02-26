@@ -5,6 +5,10 @@
     height: 30px;
 }
 
+.input-form.error {
+    background-color: red;
+}
+
 .input-container {
     display: flex;
     flex-direction: column;

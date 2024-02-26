@@ -19,10 +19,10 @@ export const getProductById = (id: number): Product | undefined => {
         return;
     }
 
-    const data = getLocalStorageData(LOCAL_STORAGE.PRODUCTS);
+    const { products } = getLocalStorageData(LOCAL_STORAGE.PRODUCTS);
 
-    if (data && Array.isArray(data)) {
-        return data.find((product: Product) => product.id === id);
+    if (products && Array.isArray(products)) {
+        return products.find((product: Product) => product.id === id);
     }
 
     return;

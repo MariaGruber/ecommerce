@@ -1,0 +1,14 @@
+.product-thumbnails {
+    margin: 5px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.product-thumbnails img {
+    align-self: center;
+}
+
+.product-detail-image {
+    width: fit-content;
+    margin:auto auto;
+}

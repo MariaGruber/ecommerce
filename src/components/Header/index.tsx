@@ -15,7 +15,10 @@ export function Header() {
                     <img className="header-menu-icon" src={heartIcon} alt="wishlist"/> 
                 </NavLink>
                 <NavLink to='/cart'>
-                    <img className="header-menu-icon" src={cartIcon} alt="cart"/>
+                    <button className="shopping-cart-button">
+                        <img className="header-menu-icon cart-icon" src={cartIcon} alt="cart"/>
+                        <div className="cart-icon-number">0</div>
+                    </button>
                 </NavLink>
             </div>
         </div>
