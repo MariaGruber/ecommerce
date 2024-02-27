@@ -1,33 +1,20 @@
-import { useEffect } from 'react';
-import { useLoaderData, useNavigate,} from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import Cards from "../../components/Cards";
 import { Product } from "../../services/types";
-import SearchBar from "../../components/SearchBar";
-import { isAuthenticated } from '../../services/isAuth';
+import { LOCAL_STORAGE } from "../../utils/constants";
 
 const Home: React.FC = () => {
-    const navigate = useNavigate();
-    const { products } = useLoaderData();
-
-  
-    useEffect(() => {
-      // Check if the user is authenticated
-      if (!isAuthenticated()) {
-        // If not authenticated, redirect to the login page
-        navigate('/login');
-      }
-    }, [navigate]);
-  
+    const { products} = useLoaderData(); 
   
     // Render the home component only if authenticated
-    return isAuthenticated() ? (
+    return (
       <>
-        <SearchBar />
+        <h3>We offer great products at a great price</h3>
         {products?.map((product: Product) => (
           <Cards key={product.id} {...product} />
         ))}
       </>
-    ) : null;
-  };
+    );
+};
   
-  export default Home;
+export default Home;
