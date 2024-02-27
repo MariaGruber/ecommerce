@@ -2,13 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Product } from '../../services/types';
 import { getProductById } from '../../services/productsService';
+import { useShoppingCart } from '../../contexts/shoppingCartContext';
 import './productDetail.css'
 
 const ProductDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const [product, setProduct] = useState<Product | null>(null);
-    const [quantity, setQuantity] = useState(1);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+    const {
+        getItemQuantity,
+        increaseCartQuantity,
+        decreaseCartQuantity,
+        removeFromCart,
+      } = useShoppingCart()
+      const quantity = getItemQuantity(parseInt(id));
     
     useEffect(() => {
         if (id) {
@@ -86,12 +93,17 @@ const ProductDetail: React.FC = () => {
   
           {/* Add to cart button */}
           <button onClick={() => {
-            // Handle adding to cart
+            increaseCartQuantity(parseInt(id))
           }}>Add to Cart</button>
+
+        
+        <button onClick={() => {
+            decreaseCartQuantity(parseInt(id))
+          }}> - </button>
   
           {/* Remove from cart button */}
           <button onClick={() => {
-            // Handle removing from cart
+            removeFromCart(parseInt(id))
           }}>Remove from Cart</button>
         </div>
 

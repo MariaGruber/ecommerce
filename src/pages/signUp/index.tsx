@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Input } from "../../components/Input";
 import { CustomButton } from "../../components/button";
 import { validateEmail, validatePassword } from "../../services/validation";
-import { setLocalStorageData } from "../../utils/localStorage";
+import { setLocalStorageData, getLocalStorageData } from "../../utils/localStorage";
 import { LOCAL_STORAGE } from "../../utils/constants";
 import "../login/login.css";
 
@@ -42,9 +42,11 @@ interface User {
       const isPasswordValid = validatePassword(password).isValid;
   
       if (isEmailValid && isPasswordValid) {
+        const storedUsers = getLocalStorageData(LOCAL_STORAGE.USERS) as User[] || [];
         // Perform signup logic (store in local storage or make an API call)
         const user: User = { fullName, email, password };
-        setLocalStorageData(LOCAL_STORAGE.USERS, user);
+        storedUsers.push(user);
+        setLocalStorageData(LOCAL_STORAGE.USERS, storedUsers);
         console.log('User signed up successfully:', user);
         navigate('/login');
       } else {

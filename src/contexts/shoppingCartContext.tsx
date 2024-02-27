@@ -1,78 +1,90 @@
-import { ReactNode, createContext, useContext } from "react";
+import { ReactNode, createContext, useContext, useState, useEffect } from "react";
+import { getLocalStorageData, setLocalStorageData } from "../utils/localStorage";
 
 type ShoppingCartProviderProps = {
     children: ReactNode;
-};
-
-type CartItem = {
+  };
+  
+  type CartItem = {
     id: number;
     quantity: number;
-}
-
-type ShoppingCartContext = {
-    getItemQuantity: (id:number) => number;
-    increaseCartQuantity: (id:number) => void;
-    decreaseCartQuantity: (id:number) => void;
-    removeFromCart: (id:number) => void;
+  };
+  
+  type ShoppingCartContext = {
+    getItemQuantity: (id: number) => number;
+    increaseCartQuantity: (id: number) => void;
+    decreaseCartQuantity: (id: number) => void;
+    removeFromCart: (id: number) => void;
     cartQuantity: number;
     cartItems: CartItem[];
-}
-
-
-const ShoppingCartContext = createContext({} as ShoppingCartContext); 
-
-export function useShoppingCart() {
-    return useContext(ShoppingCartContext)
-};
-
-export function ShoppingCartProvider({ children }:ShoppingCartProviderProps) {
-    const [CartItems, setCartItems]= useState<CartItem[]>([])
-    
+  };
+  
+  const ShoppingCartContext = createContext({} as ShoppingCartContext);
+  
+  export function useShoppingCart() {
+    return useContext(ShoppingCartContext);
+  }
+  
+  export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
+    const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  
+    useEffect(() => {
+      // Retrieve cart items from local storage on component mount
+      const storedCartItems = getLocalStorageData<CartItem[]>("shopping-cart", []);
+      setCartItems(storedCartItems);
+    }, []);
+  
+    useEffect(() => {
+      // Update local storage whenever cart items change
+      setLocalStorageData("shopping-cart", cartItems);
+    }, [cartItems]);
+  
+    const cartQuantity = cartItems.reduce((quantity, item) => item.quantity + quantity, 0);
+  
     function getItemQuantity(id: number) {
-        return CartItems.find(item => item.id === id)?.quantity || 0
+      return cartItems.find((item) => item.id === id)?.quantity || 0;
     }
-
-    function increaseCartQuantity(id:number) {
-        setCartItems(currentItems => {
-            if (currentItems.find(item => item.id ===id)== null) {
-                return [...currentItems, {id, quantity:1}]
-            } else {
-                return currentItems.map(item => {
-                    if (item.id === id) {
-                        return {...item, quantity: item.quantity + 1}
-                    } else {
-                        return item
-                    }
-                })
-            }
-        })
+  
+    function increaseCartQuantity(id: number) {
+      setCartItems((currentItems) => {
+        if (!currentItems.find((item) => item.id === id)) {
+          return [...currentItems, { id, quantity: 1 }];
+        } else {
+          return currentItems.map((item) =>
+            item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+          );
+        }
+      });
     }
-
-    function decreaseCartQuantity(id:number) {
-        setCartItems(currentItems => {
-            if (currentItems.find(item => item.id ===id)?.quantity === 1) {
-                return currentItems.filter(item => item.id !==id)
-            } else {
-                return currentItems.map(item => {
-                    if (item.id === id) {
-                        return {...item, quantity: item.quantity - 1}
-                    } else {
-                        return item
-                    }
-                })
-            }
-        })
-    };
-
+  
+    function decreaseCartQuantity(id: number) {
+      setCartItems((currentItems) => {
+        if ((currentItems.find((item) => item.id === id)?.quantity || 1) === 1) {
+          return currentItems.filter((item) => item.id !== id);
+        } else {
+          return currentItems.map((item) =>
+            item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+          );
+        }
+      });
+    }
+  
     function removeFromCart(id: number) {
-        setCartItems(currentItems => {
-            return currentItems.filter(item => item.id !== id)
-        })
-    };
-    
+      setCartItems((currentItems) => currentItems.filter((item) => item.id !== id));
+    }
+  
     return (
-        <ShoppingCartContext.Provider value={{getItemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart}}>
-            {children}
-        </ShoppingCartContext.Provider>
-    )
-};
+      <ShoppingCartContext.Provider
+        value={{
+          getItemQuantity,
+          increaseCartQuantity,
+          decreaseCartQuantity,
+          removeFromCart,
+          cartItems,
+          cartQuantity,
+        }}
+      >
+        {children}
+      </ShoppingCartContext.Provider>
+    );
+  }

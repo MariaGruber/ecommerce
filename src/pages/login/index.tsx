@@ -23,6 +23,7 @@ const LogIn: React.FC = () => {
     const handleLogin = () => {
         const storedUsers = getLocalStorageData(LOCAL_STORAGE.USERS) as User[];
         console.log('users--->', storedUsers)
+        console.log(typeof(storedUsers))
         // Find the user with the entered email in the local storage
         const user = storedUsers.find((u: User) => u.email === email) || {} as User;
 
