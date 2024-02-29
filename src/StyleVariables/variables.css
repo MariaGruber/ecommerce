@@ -1,0 +1,14 @@
+:root {
+ --primary-button: #0C8A7B;
+ --light-background-contrast: #292F2D;
+ --another-option-for-background-contrast: #1b201e;
+ --secondary-text: #828A89;
+ --primary-text: #FFFFFF;
+ --price: #F2A666;
+ --general-background: #1E1E1E;
+}
+
+html {
+  
+    box-sizing: border-box;
+}

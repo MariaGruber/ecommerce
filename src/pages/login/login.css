@@ -1,0 +1,19 @@
+.login-title {
+    font-size: 2.5rem;
+    margin-top: 7rem;
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+.login-subtitle {
+    text-align:center;
+    margin-bottom: 3rem;
+    margin-top:0;
+    color: var(--secondary-text)
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

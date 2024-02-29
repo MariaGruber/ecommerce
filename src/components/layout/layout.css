@@ -1,0 +1,10 @@
+.layout-content {
+    height:  88vh;
+    width: 100vw;
+    padding-bottom: 1rem;
+}
+
+.layout-container {
+  height: 100vh;
+  position:relative;
+}

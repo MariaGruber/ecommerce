@@ -1,0 +1,8 @@
+@import "../../StyleVariables/variables.css";
+
+.login-singup-button {
+    width:15rem;
+    background-color: var(--primary-button);
+    font-size: 1.2rem;
+    margin-top: 2rem;
+}
