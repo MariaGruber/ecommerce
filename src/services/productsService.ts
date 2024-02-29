@@ -3,7 +3,6 @@ import { LOCAL_STORAGE } from "../utils/constants";
 import { Product } from "./types";
 import productsData  from '../products.json';
 
-// Funcion que busca los datos de los productos
 export const getProducts = (): unknown => {
     const data = getLocalStorageData(LOCAL_STORAGE.PRODUCTS);
     if (data && Object.values(data).length) return data;
@@ -12,7 +11,6 @@ export const getProducts = (): unknown => {
     return productsData;
 };
 
-// Funcion que busca productos por un ID
 export const getProductById = (id: number): Product | undefined => {
     if (!id) {
         console.error('Debe proporcionar un ID de producto', id);

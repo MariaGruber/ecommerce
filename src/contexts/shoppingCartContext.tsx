@@ -40,13 +40,11 @@ type ShoppingCartProviderProps = {
 
     
     useEffect(() => {
-      // Retrieve cart items from local storage on component mount
       const storedCartItems = getLocalStorageData(LOCAL_STORAGE.SHOPPING_CART) as CartItem[];
       setCartItems(storedCartItems);
     }, []);
   
     useEffect(() => {
-      // Update local storage whenever cart items change
       setLocalStorageData(LOCAL_STORAGE.SHOPPING_CART, cartItems);
     }, [cartItems]);
 
