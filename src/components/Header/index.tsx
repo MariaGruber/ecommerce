@@ -18,7 +18,6 @@ export function Header() {
 
     const clearLocalStorage = () => {
         for (const key in localStorage) {
-          // Exclude the "USERS" key from being cleared
         if (key !== 'USERS'&& key !== 'PRODUCTS') {
             localStorage.removeItem(key);
             navigate('/login');
@@ -41,7 +40,9 @@ export function Header() {
                 <img className="header-menu-icon" src={arrowIcon} alt="go back" onClick={goBack}/>
                 {isMenuOpen && (
                     <div className="logout-menu">
-                        <button onClick={clearLocalStorage}>Logout</button>
+                        <button className="logout-menu-button" 
+                        onClick={clearLocalStorage}>Logout
+                        </button>
                     </div>
                  )}
             </div>

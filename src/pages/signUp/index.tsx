@@ -5,6 +5,7 @@ import { CustomButton } from "../../components/button";
 import { validateEmail, validatePassword } from "../../services/validation";
 import { setLocalStorageData, getLocalStorageData } from "../../utils/localStorage";
 import { LOCAL_STORAGE } from "../../utils/constants";
+import toast from "react-hot-toast";
 import "../login/login.css";
 
 interface User {
@@ -37,17 +38,15 @@ interface User {
     };
   
     const handleSignup = () => {
-      // Validate input
       const isEmailValid = validateEmail(email);
       const isPasswordValid = validatePassword(password).isValid;
   
       if (isEmailValid && isPasswordValid) {
         const storedUsers = getLocalStorageData(LOCAL_STORAGE.USERS) as User[] || [];
-        // Perform signup logic (store in local storage or make an API call)
         const user: User = { fullName, email, password };
         storedUsers.push(user);
         setLocalStorageData(LOCAL_STORAGE.USERS, storedUsers);
-        console.log('User signed up successfully:', user);
+        toast.success('User signed up successfully, please log in')
         navigate('/login');
       } else {
         if (!isEmailValid) {
@@ -56,7 +55,7 @@ interface User {
         if (!isPasswordValid) {
           setPasswordValid(false);
         }
-        alert('Invalid input. Please fix the highlighted fields.');
+        toast.error('Invalid input. Please fix the highlighted fields.');
       }
     };
   
@@ -90,7 +89,8 @@ interface User {
             <p>Password Requirements:</p>
             <ul>
               {passwordRequirements.map((requirement, index) => (
-                <li key={index} style={{ color: requirement.includes('✗') ? 'red' : 'green' }}>
+                <li key={index} 
+                style={{ color: requirement.includes('✗') ? 'red' : 'green' }}>
                   {requirement}
                 </li>
               ))}

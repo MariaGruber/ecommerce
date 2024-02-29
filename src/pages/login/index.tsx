@@ -4,6 +4,7 @@ import { getLocalStorageData, setLocalStorageData } from '../../utils/localStora
 import { Input } from "../../components/Input";
 import { CustomButton } from "../../components/button";
 import { LOCAL_STORAGE } from '../../utils/constants';
+import toast from 'react-hot-toast';
 import "./login.css";
 
 
@@ -22,39 +23,34 @@ const LogIn: React.FC = () => {
 
     const handleLogin = () => {
         const storedUsers = getLocalStorageData(LOCAL_STORAGE.USERS) as User[];
-        console.log('users--->', storedUsers)
-        console.log(typeof(storedUsers))
-        // Find the user with the entered email in the local storage
         const user = storedUsers.find((u: User) => u.email === email) || {} as User;
 
         if (!user) {
             setError(true);
-            // If the user is not found, display a message
-            console.log('Email not valid. Please sign up.');
+            toast.error('Email not valid. Please sign up.');
         } else {
             setError(false);
             if (user.password === password) {
                 const startDate = new Date();
-                console.log(`Welcome, ${user.fullName}!`);
+                toast.success(`Welcome, ${user.fullName}!`);
                 setLocalStorageData(LOCAL_STORAGE.SESSION, user)
                 navigate('/');
             } else {
-                // If the password does not match, display an error message
-                console.log('Invalid password. Please try again.');
+                toast.error('Invalid password. Please try again.');
             }
         }
     };
 
-return (
-    <div className="page-container">
-        <h1 className="login-title">Welcome back!</h1>
-        <p className="login-subtitle">
+    return (
+        <div className="page-container">
+            <h1 className="login-title">Welcome back!</h1>
+            <p className="login-subtitle">
             Please Log in to start shopping
-        </p>
+            </p>
         <Input
             title="Email"
             type="email"
-            placeholder=""
+            placeholder="Example@gmail.com"
             value={email}
             onChange={setEmail}
             error={error}
@@ -62,7 +58,7 @@ return (
         <Input
             title="Password"
             type="password"
-            placeholder=""
+            placeholder="**********"
             value={password}
             onChange={setPassword}
             error={error}

@@ -1,14 +1,102 @@
+.product-detail-img-container {
+    background-color: var(--light-background-contrast);
+    border-radius: 0.5rem;
+    margin: 1rem;
+    padding: 0.5rem;
+}
 .product-thumbnails {
     margin: 5px auto;
     display: flex;
     justify-content: center;
+    margin-top: 0;
 }
 
 .product-thumbnails img {
     align-self: center;
+    margin: 0.4rem;
 }
 
 .product-detail-image {
     width: fit-content;
     margin:auto auto;
+    object-fit: cover;
+}
+
+.product-detail-info {
+    padding: 1rem;
+    color: var(--secondary-text);
+}
+
+.product-detail-quantity {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+}
+.product-detail-quantity input {
+    font-size: 1.4rem;
+    margin-left: 1rem;
+}
+
+.product-name-wishlist-icon {
+    display:flex;
+    color: var(--primary-text);
+}
+.product-name-wishlist-icon img {
+    margin-left: 0.5rem;
+    width: 2.4rem;
+}
+.price {
+    color:var(--price);
+    font-size:1.4rem;
+    margin-top:0;
+}
+
+.product-detail-info button {
+    margin-top: 1rem;
+    margin-right: 0.5rem;
+}
+.add-button {
+    background-color: var(--primary-button);
+    font-size: 1.2rem;
+}
+.add-button-small {
+    background-color: var(--primary-button);
+}
+
+.less-button {
+    font-size: 1.2rem;
+}
+
+.remove-button {
+    font-size: 1.2rem;
+}
+.cart-item {
+    display:flex;
+    background-color: var(--another-option-for-background-contrast);
+    margin: 0.8rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0.2rem;
+}
+
+.cart-buttons {
+    font-size: 1rem;
+}
+.cart-buttons button {
+    margin-right: 0.5rem;
+}
+header h2 {
+    margin-left: 1rem;
+    margin-top: 1.8rem;
+}
+
+.wishlist-buttons {
+    font-size: 1.2rem;
+    margin-left: 0;
+}
+.wishlist-info {
+    font-size: 1.4rem;
+}
+
+.wishlist-info p:nth-child(2) {
+    color: var(--price);
+    font-weight: 600;
 }

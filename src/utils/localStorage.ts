@@ -1,6 +1,4 @@
-//import { TuserSession } from "../contexts/types";
-//import { Product } from "../services/types";
-//import { User } from "../pages/login";
+
 
 export const setLocalStorageData = (key: string, data: unknown): void => {
     try {

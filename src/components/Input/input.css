@@ -1,8 +1,10 @@
 .input-form {
-    width: 250px;
+    width: 340px;
     background-color: grey;
-    border-radius: 8px;
-    height: 30px;
+    border-radius: 10px;
+    height: 40px;
+    font-size: 1.2rem;
+    color: var(--primary-text)
 }
 
 .input-form.error {

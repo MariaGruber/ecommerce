@@ -1,9 +1,10 @@
 
 import { useShoppingCart } from "../../contexts/shoppingCartContext";
-import { formatCurrency } from "../../utilities/formatCurrency";
+import { formatCurrency } from "../../utils/formatCurrency";
 import { getLocalStorageData } from "../../utils/localStorage";
 import { products as productsData } from "../../products.json";
 import { Product } from "../../services/types";
+import "../productDescription/productDetail.css"
 
 const Cart: React.FC = () => {
   const { 
@@ -13,14 +14,11 @@ const Cart: React.FC = () => {
     decreaseCartQuantity,
     removeFromCart, } = useShoppingCart();
 
-
-  // Retrieve the products array from local storage
   const products: Product[] = getLocalStorageData("products", []) || [];
 
-  // Function to find product details based on id
   const findProductById = (productId: number) => {
     const product = productsData.find((p: any) => p.id === productId);
-  return product;
+    return product;
   };
 
   return (
@@ -31,35 +29,38 @@ const Cart: React.FC = () => {
 
       <div>
         {cartItems.map((item) => {
-        
-          // Find the product based on item.id
           const product = findProductById(item.id);
 
           if (product) {
             return (
               <div key={item.id} className="cart-item">
-                <div>
-                    <img src={product.image[0]} alt={product.name} />
+                <div className="product-detail-img-container">
+                    <img className="product-detail-image" 
+                    src={product.image[0]} 
+                    alt={product.name} 
+                    style={{ width: '6rem', height: '8rem' }}/>
                 </div>
-                {/* Display Product Name */}
-                <p>{product.name}</p>
+                <div>
+                    <p>{product.name}</p>
+                    <p>{formatCurrency(product.price)}</p>
+                    <p>Quantity: {item.quantity}</p>
+                    <section className="cart-buttons">
+                        <button className="add-button-small" onClick={() => 
+                            {increaseCartQuantity(product.id)}}>
+                            +
+                        </button>
 
-                {/* Display Product Price */}
-                <p>{formatCurrency(product.price)}</p>
+                        <button onClick={() => 
+                            {decreaseCartQuantity(product.id)}}>
+                            -
+                        </button>
 
-                {/* Display Quantity */}
-                <p>Quantity: {item.quantity}</p>
-
-                {/* Add more details or actions as needed */}
-                <button onClick={() => {increaseCartQuantity(product.id)}}>
-                  +
-                </button>
-                <button onClick={() => {decreaseCartQuantity(product.id)}}>
-                  -
-                </button>
-                <button onClick={() => {removeFromCart(product.id)}}>
-                  Remove from Cart
-                </button>
+                        <button onClick={() =>
+                            {removeFromCart(product.id)}}>
+                                Remove
+                        </button>
+                    </section> 
+                </div>
               </div>
             );
           } else {

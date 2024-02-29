@@ -3,12 +3,29 @@ import { useParams } from 'react-router-dom';
 import { Product } from '../../services/types';
 import { getProductById } from '../../services/productsService';
 import { useShoppingCart } from '../../contexts/shoppingCartContext';
+import HeartIconEmpty from '../../assets/icons/heart.svg';
+import { formatCurrency } from '../../utils/formatCurrency';
+import HeartIcon from '../../assets/icons/heart-filled.svg';
 import './productDetail.css'
 
 const ProductDetail: React.FC = () => {
-    const { id } = useParams<{ id: string }>();
+    const { id } = useParams();
     const [product, setProduct] = useState<Product | null>(null);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+    const { addToWishlist, wishlistItems = [], removeFromWishlist} = useShoppingCart();
+    const isWishlistItem = wishlistItems?.some((item) => item.id === parseInt(id)) || false;
+    
+    const handleWishlistToggle = () => {
+        if (isWishlistItem) {
+            if (removeFromWishlist) {
+                removeFromWishlist(parseInt(id));
+            }
+        } else {
+            if (addToWishlist) {
+                addToWishlist(parseInt(id));
+            }
+        }
+    }
     const {
         getItemQuantity,
         increaseCartQuantity,
@@ -21,8 +38,7 @@ const ProductDetail: React.FC = () => {
         if (id) {
           const fetchData = async () => {
             try {
-              const productDetail = await getProductById(parseInt(id));
-              console.log('productDetail--->', productDetail);
+              const productDetail = await getProductById(parseInt(id)) as Product;
               setProduct(productDetail);
             } catch (error) {
               console.error('Error fetching product details:', error);
@@ -33,10 +49,10 @@ const ProductDetail: React.FC = () => {
         }
       }, [id]);
   
-    const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const newQuantity = parseInt(event.target.value, 10) || 1;
-      setQuantity(newQuantity);
-    };
+    const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => 
+        {
+            const newQuantity = parseInt(event.target.value, 10) || 1;
+        };
   
     if (!product) {
       return <p>Product not found</p>;
@@ -44,80 +60,55 @@ const ProductDetail: React.FC = () => {
   
     return (
       <div>
-        <div className='product-thumbnails'>
-          {/* Small squares with images */}
-          {product.image.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`Product ${index}`}
-              style={{ width: '50px', height: '50px', cursor: 'pointer' }}
-              onClick={() => {setSelectedImageIndex(index)} 
-                // Handle image click to display larger image
-              }
-            />
-          ))}
-        </div>
-  
-        <div className='product-detail-image'>
-          {/* Large image */}
-          <img src={product.image[selectedImageIndex]} alt="Product" style={{ width: '200px', height: '200px' }} />
-        </div>
-  
-        <div>
-          {/* Title and price */}
-          <h2>{product.name}</h2>
-          <p>
-            Price: ${product.price} | Stock: {product.stock}
-          </p>
-  
-          {/* Rating */}
-          <div>
-            Rating: {product.rating} stars
-          </div>
-  
-          {/* Description */}
-          <p>{product.description}</p>
-  
-          {/* Quantity selection */}
-          <div>
-            <label>Quantity:</label>
-            <input
-              type="number"
-              value={quantity}
-              min={1}
-              max={product.stock}
-              onChange={handleQuantityChange}
-            />
-          </div>
-  
-          {/* Add to cart button */}
-          <button onClick={() => {
-            increaseCartQuantity(parseInt(id))
-          }}>Add to Cart</button>
+        <section className="product-detail-img-container">
+            <div className='product-thumbnails'>
+                {product.image.map((image, index) => (
+                    <img
+                        key={index}
+                        src={image}
+                        alt={`Product ${index}`}
+                        style={{ width: '50px', height: '50px', cursor: 'pointer' }}
+                        onClick={() => {setSelectedImageIndex(index)} 
+                        }
+                    />
+                ))}
+            </div>
 
-        
-        <button onClick={() => {
-            decreaseCartQuantity(parseInt(id))
-          }}> - </button>
-  
-          {/* Remove from cart button */}
-          <button onClick={() => {
-            removeFromCart(parseInt(id))
-          }}>Remove from Cart</button>
-        </div>
+            <div className='product-detail-image'>
+                <img src={product.image[selectedImageIndex]} alt="Product" style={{ width: '200px', height: '200px' }} />
+            </div>
+        </section>
 
-        {/* Reviews */}
-        <div>
-            <h3>Reviews</h3>
-            {product.reviews.map((review, index) => (
-              <div key={index}>
-                <p>User: {review.userId}</p>
-                <p>Description: {review.comment}</p>
-                <p>Rating: {review.rating} stars</p>
-              </div>
-            ))}
-          </div>
+        <div className="product-detail-info">
+            <section className='product-name-wishlist-icon'>
+                <h2>{product.name}</h2>
+                <img className="heart-icon" src={isWishlistItem ? HeartIcon : HeartIconEmpty} alt="add to wishlist" onClick={handleWishlistToggle} />
+            </section>
+            <p className="price">Price: {formatCurrency(product.price)}| Stock: {product.stock}</p>
+            <div> Rating: {product.rating} stars </div>
+            <p>{product.description}</p>
+            <div className="product-detail-quantity">
+                <label>Quantity:</label>
+                <input
+                    type="number"
+                    value={quantity}
+                    min={1}
+                    max={product.stock}
+                    onChange={handleQuantityChange}
+                />
+            </div>
+            <button className="add-button" onClick={() => {
+                increaseCartQuantity(parseInt(id))
+            }}>Add to Cart</button>
+
+            <button className="less-button" onClick={() => {
+                decreaseCartQuantity(parseInt(id))
+            }}> - </button>
+  
+            <button className="remove-button" onClick={() => {
+                removeFromCart(parseInt(id))
+            }}>Remove from Cart</button>
+            </div>
       </div>
     );
   };

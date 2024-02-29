@@ -1,5 +1,7 @@
+
 import { ReactNode, createContext, useContext, useState, useEffect } from "react";
 import { getLocalStorageData, setLocalStorageData } from "../utils/localStorage";
+import { LOCAL_STORAGE } from "../utils/constants";
 
 type ShoppingCartProviderProps = {
     children: ReactNode;
@@ -9,6 +11,10 @@ type ShoppingCartProviderProps = {
     id: number;
     quantity: number;
   };
+
+  type WishlistItem = {
+    id: number;
+};
   
   type ShoppingCartContext = {
     getItemQuantity: (id: number) => number;
@@ -17,6 +23,9 @@ type ShoppingCartProviderProps = {
     removeFromCart: (id: number) => void;
     cartQuantity: number;
     cartItems: CartItem[];
+    wishlistItems?: WishlistItem[];
+    addToWishlist?: (id: number) => void;
+    removeFromWishlist?: (id: number) => void;
   };
   
   const ShoppingCartContext = createContext({} as ShoppingCartContext);
@@ -27,17 +36,39 @@ type ShoppingCartProviderProps = {
   
   export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
     const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  
+    const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>([]);
+
+    
     useEffect(() => {
       // Retrieve cart items from local storage on component mount
-      const storedCartItems = getLocalStorageData<CartItem[]>("SHOPPING-CART", []);
+      const storedCartItems = getLocalStorageData(LOCAL_STORAGE.SHOPPING_CART) as CartItem[];
       setCartItems(storedCartItems);
     }, []);
   
     useEffect(() => {
       // Update local storage whenever cart items change
-      setLocalStorageData("SHOPPING-CART", cartItems);
+      setLocalStorageData(LOCAL_STORAGE.SHOPPING_CART, cartItems);
     }, [cartItems]);
+
+    useEffect(() => {
+        const storedWishListItems = getLocalStorageData(LOCAL_STORAGE.WISHLIST) as WishlistItem[];
+        setWishlistItems(storedWishListItems);
+      }, []);
+      
+      useEffect(() => {
+        if (wishlistItems !== undefined) {
+          setLocalStorageData(LOCAL_STORAGE.WISHLIST, wishlistItems);
+        }
+      }, [wishlistItems]);
+    
+    const addToWishlist = (id: number) => {
+        setWishlistItems((prevItems) => [...prevItems, { id }]);
+    };
+
+    const removeFromWishlist = (id: number) => {
+        setWishlistItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    };
+  
   
     const cartQuantity = cartItems.reduce((quantity, item) => item.quantity + quantity, 0);
   
@@ -82,6 +113,9 @@ type ShoppingCartProviderProps = {
           removeFromCart,
           cartItems,
           cartQuantity,
+          wishlistItems,
+            addToWishlist,
+            removeFromWishlist,
         }}
       >
         {children}
